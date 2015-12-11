@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Ejemplo 3.1</string>
+    <string name="t_user">Usuario</string>
+    <string name="t_password">Contraseña</string>
+    <string name="h_user">Introduce DNI</string>
+    <string name="h_password">Introduce password</string>
+    <string name="acceder">Acceder</string>
+    <string name="alumnoTTA">Alumno de TTA</string>
+    <string name="nuevoTest">Nuevo Test</string>
+    <string name="nuevoEjercicio">Nuevo ejercicio</string>
+    <string name="seguimiento">Seguimiento</string>
+    <string name="button_send">Enviar</string>
+    <string name="button_advice">Ver ayuda</string>
+    <string name="record_video">Grabar video</string>
+    <string name="record_audio">Grabar audio</string>
+    <string name="take_photo">Sacar foto</string>
+    <string name="send_file">Subir fichero</string>
+    <string name="evaluacionTTA">Evaluacion de TTA</string>
+</resources>
