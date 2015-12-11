@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/alumnoTTA">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             android:label="@string/nuevoTest" />
         <activity
             android:name=".ExerciseActivity"
-            android:label="@string/nuevoEjercicio"></activity>
+            android:label="@string/nuevoEjercicio" />
     </application>
 
 </manifest>
