@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editLogin = (EditText) findViewById(R.id.login);
 
         String l = loadLogin();
-        if(l!=null){
+        if (l != null) {
             editLogin.setText(l);
         }
     }

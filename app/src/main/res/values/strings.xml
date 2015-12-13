@@ -16,4 +16,5 @@
     <string name="take_photo">Sacar foto</string>
     <string name="send_file">Subir fichero</string>
     <string name="evaluacionTTA">Evaluacion de TTA</string>
+    <string name="title_activity_prueba">PruebaActivity</string>
 </resources>

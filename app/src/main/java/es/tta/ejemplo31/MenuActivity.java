@@ -1,8 +1,11 @@
 package es.tta.ejemplo31;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +36,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void seguimiento(View view) {
-        Toast.makeText(this,"\"Seguimiento\" sin implementar",Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(this, "\"Seguimiento\" sin implementar", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
