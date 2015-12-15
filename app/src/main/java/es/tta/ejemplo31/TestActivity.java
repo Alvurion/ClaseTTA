@@ -54,7 +54,7 @@ public class TestActivity extends AppCompatActivity {
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviar.setVisibility(View.GONE);
+                enviar.setVisibility(View.GONE); //La vista desaparece y no ocupa espacio en la actividad
                 ayuda.setVisibility(View.VISIBLE);
 
                 final int correct = 2;
