@@ -22,7 +22,15 @@ public class MenuActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         TextView textLogin = (TextView) findViewById(R.id.menu_login);
-        textLogin.setText(intent.getStringExtra(MainActivity.EXTRA_LOGIN));
+
+        final String dni = intent.getStringExtra(MainActivity.EXTRA_LOGIN);
+
+        if (dni.equals("78993014C")) {
+            textLogin.setText("Bienvenido Álvaro Urionabarrenetxea");
+        } else {
+            textLogin.setText("Bienvenido " + dni);
+        }
+
     }
 
     public void test(View view) {

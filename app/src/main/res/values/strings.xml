@@ -17,4 +17,6 @@
     <string name="send_file">Subir fichero</string>
     <string name="evaluacionTTA">Evaluacion de TTA</string>
     <string name="title_activity_prueba">PruebaActivity</string>
+    <string name="preguntaTest">¿Cuál de las siguientes opciones NO se indica en el fichero de manifiesto de la app?</string>
+    <string name="texto_ayuda">The manifest describes the components of the application: the activities, services, broadcast receivers, and content providers that the application is composed of. It names the classes that implement each of the components and publishes their capabilities (for example, which Intent messages they can handle). These declarations let the Android system know what the components are and under what conditions they can be launched.</string>
 </resources>

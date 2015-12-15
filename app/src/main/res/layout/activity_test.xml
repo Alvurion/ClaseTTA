@@ -11,12 +11,13 @@
     tools:context="es.tta.ejemplo31.TestActivity">
 
     <TextView
+        android:id="@+id/pregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Texto de la pregunta"
-        android:layout_gravity="center_horizontal"/>
-    
+        android:layout_gravity="center_horizontal" />
+
     <RadioGroup
+        android:id="@+id/test_choices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!-- Populated programmatically -->
@@ -24,18 +25,21 @@
 
     <Button
         android:id="@+id/button_send_test"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_send"
-        android:onClick="send"/>
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/button_advice"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_advice"
-        android:onClick="advice"/>
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/texto_ayuda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
