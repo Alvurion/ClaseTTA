@@ -4,16 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Console;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -67,7 +65,7 @@ public class TestActivity extends AppCompatActivity {
                     group.getChildAt(i).setEnabled(false);
                 }
 
-                int selected = group.getCheckedRadioButtonId()-1;
+                int selected = group.getCheckedRadioButtonId() - 1;
 
                 group.getChildAt(correct).setBackgroundColor(Color.GREEN);
 
@@ -90,6 +88,15 @@ public class TestActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RadioGroup group = (RadioGroup) findViewById(R.id.test_choices);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout_test);
+        layout.removeView(group);
+        finish();
     }
 
 

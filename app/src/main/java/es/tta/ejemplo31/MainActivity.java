@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setTitle(R.string.alumnoTTA);
+
         EditText editLogin = (EditText) findViewById(R.id.login);
 
         String l = loadLogin();
@@ -26,14 +29,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
     public void login(View view) {
-        Intent intent = new Intent(this, MenuActivity.class);
-        EditText editLogin = (EditText) findViewById(R.id.login);
-        EditText editPasswd = (EditText) findViewById(R.id.passwd);
-        saveLogin(editLogin.getText().toString());
-        intent.putExtra(EXTRA_LOGIN, editLogin.getText().toString());
-        intent.putExtra(EXTRA_PASSWD, editPasswd.getText().toString());
-        startActivity(intent);
+
+        EditText passwd = (EditText)findViewById(R.id.passwd);
+        String pwd = passwd.getText().toString();
+
+        if(!pwd.equals("tta") || pwd.isEmpty()){
+            Toast.makeText(this,"Contraseña errónea",Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(this, MenuActivity.class);
+            EditText editLogin = (EditText) findViewById(R.id.login);
+            EditText editPasswd = (EditText) findViewById(R.id.passwd);
+            saveLogin(editLogin.getText().toString());
+            intent.putExtra(EXTRA_LOGIN, editLogin.getText().toString());
+            intent.putExtra(EXTRA_PASSWD, editPasswd.getText().toString());
+            startActivity(intent);
+        }
+
+
     }
 
     private String loadLogin() {
