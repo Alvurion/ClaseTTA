@@ -29,14 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_send"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="enviar"/>
 
     <Button
         android:id="@+id/button_advice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_advice"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="ayuda"/>
 
     <TextView
         android:id="@+id/texto_ayuda"

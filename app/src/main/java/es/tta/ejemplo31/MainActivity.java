@@ -29,20 +29,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
-
     public void login(View view) {
 
-        EditText passwd = (EditText)findViewById(R.id.passwd);
+        EditText passwd = (EditText) findViewById(R.id.passwd);
         String pwd = passwd.getText().toString();
 
-        if(!pwd.equals("tta") || pwd.isEmpty()){
-            Toast.makeText(this,"Contraseña errónea",Toast.LENGTH_SHORT).show();
-        }else{
+        if (!pwd.equals("tta") || pwd.isEmpty()) {
+            Toast.makeText(this, "Contraseña errónea", Toast.LENGTH_SHORT).show();
+        } else {
             Intent intent = new Intent(this, MenuActivity.class);
             EditText editLogin = (EditText) findViewById(R.id.login);
             EditText editPasswd = (EditText) findViewById(R.id.passwd);
@@ -51,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_PASSWD, editPasswd.getText().toString());
             startActivity(intent);
         }
-
-
     }
 
     private String loadLogin() {

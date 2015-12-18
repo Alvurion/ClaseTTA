@@ -18,14 +18,14 @@ public class TestActivity extends AppCompatActivity {
     //Actividad en la que se muestran las opciones de una pregunta del test
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws NullPointerException{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
 
         final Button enviar = (Button) findViewById(R.id.button_send_test);
-        final Button ayuda = (Button) findViewById(R.id.button_advice);
+
 
         TextView pregunta = (TextView) findViewById(R.id.pregunta);
         pregunta.setText(R.string.preguntaTest);
@@ -43,6 +43,7 @@ public class TestActivity extends AppCompatActivity {
         for (i = 0; i < 5; i++) {
             RadioButton radio = new RadioButton(this);
             radio.setText(opciones[i]);
+            radio.setId(i);
             radio.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -51,52 +52,39 @@ public class TestActivity extends AppCompatActivity {
             });
             group.addView(radio);
         }
-
-        enviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enviar.setVisibility(View.GONE); //La vista desaparece y no ocupa espacio en la actividad
-                ayuda.setVisibility(View.VISIBLE);
-
-                final int correct = 2;
-
-                int choices = group.getChildCount();
-                for (int i = 0; i < choices; i++) {
-                    group.getChildAt(i).setEnabled(false);
-                }
-
-                int selected = group.getCheckedRadioButtonId() - 1;
-
-                group.getChildAt(correct).setBackgroundColor(Color.GREEN);
-
-                if (selected != correct) {
-                    Toast.makeText(getApplicationContext(), "Has fallado", Toast.LENGTH_SHORT).show();
-                    group.getChildAt(selected).setBackgroundColor(Color.RED);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Has acertado", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-        ayuda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView texto_ayuda = (TextView) findViewById(R.id.texto_ayuda);
-                texto_ayuda.setText(R.string.texto_ayuda);
-            }
-        });
-
-
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RadioGroup group = (RadioGroup) findViewById(R.id.test_choices);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layout_test);
-        layout.removeView(group);
-        finish();
+    public void enviar(View view){
+
+        Button enviar = (Button)findViewById(R.id.button_send_test);
+        Button ayuda = (Button) findViewById(R.id.button_advice);
+        RadioGroup group = (RadioGroup)findViewById(R.id.test_choices);
+
+        final int correct = 2;
+
+        enviar.setVisibility(View.GONE); //La vista desaparece y no ocupa espacio en la actividad
+        ayuda.setVisibility(View.VISIBLE);
+
+        int choices = group.getChildCount();
+        for (int i = 0; i < choices; i++) {
+            group.getChildAt(i).setEnabled(false);
+        }
+
+        int selected = group.getCheckedRadioButtonId();
+
+        group.getChildAt(correct).setBackgroundColor(Color.GREEN);
+
+        if (selected != correct) {
+            Toast.makeText(getApplicationContext(), "Has fallado", Toast.LENGTH_SHORT).show();
+            group.getChildAt(selected).setBackgroundColor(Color.RED);
+        } else {
+            Toast.makeText(getApplicationContext(), "Has acertado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void ayuda(View view){
+        TextView texto_ayuda = (TextView) findViewById(R.id.texto_ayuda);
+        texto_ayuda.setText(R.string.texto_ayuda);
     }
 
 
