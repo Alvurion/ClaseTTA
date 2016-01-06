@@ -22,4 +22,5 @@
     <string name="no_camera">No hay cámara</string>
     <string name="no_app">No hay una app disponible</string>
     <string name="no_micro">No hay micrófono</string>
+    <string name="badPassword">Contraseña errónea</string>
 </resources>

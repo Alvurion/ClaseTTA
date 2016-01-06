@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editLogin = (EditText) findViewById(R.id.login);
 
         String l = loadLogin();
-        if (l != null || l.isEmpty()) {
+        if (l != null) {
             editLogin.setText(l);
         }
     }
@@ -34,15 +34,14 @@ public class MainActivity extends AppCompatActivity {
         EditText passwd = (EditText) findViewById(R.id.passwd);
         String pwd = passwd.getText().toString();
 
-        if (!pwd.equals("tta") || pwd.isEmpty()) {
-            Toast.makeText(this, "Contraseña errónea", Toast.LENGTH_SHORT).show();
+        if (!pwd.equals("tta")) {
+            Toast.makeText(this, R.string.badPassword, Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(this, MenuActivity.class);
             EditText editLogin = (EditText) findViewById(R.id.login);
-            EditText editPasswd = (EditText) findViewById(R.id.passwd);
             saveLogin(editLogin.getText().toString());
             intent.putExtra(EXTRA_LOGIN, editLogin.getText().toString());
-            intent.putExtra(EXTRA_PASSWD, editPasswd.getText().toString());
+            intent.putExtra(EXTRA_PASSWD, pwd);
             startActivity(intent);
         }
     }

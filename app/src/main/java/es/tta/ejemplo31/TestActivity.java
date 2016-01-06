@@ -18,7 +18,7 @@ public class TestActivity extends AppCompatActivity {
     //Actividad en la que se muestran las opciones de una pregunta del test
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) throws NullPointerException{
+    protected void onCreate(Bundle savedInstanceState) throws NullPointerException {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
@@ -38,9 +38,12 @@ public class TestActivity extends AppCompatActivity {
                 "Nombre del paquete java de la aplicación"
         };
 
+        int num_opt = opciones.length;
+        Toast.makeText(getApplicationContext(), "Número de opciones: "+Integer.toString(num_opt),Toast.LENGTH_SHORT).show();
+
         final RadioGroup group = (RadioGroup) findViewById(R.id.test_choices);
         int i;
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < num_opt; i++) {
             RadioButton radio = new RadioButton(this);
             radio.setText(opciones[i]);
             radio.setId(i);
@@ -54,11 +57,11 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public void enviar(View view){
+    public void enviar(View view) {
 
-        Button enviar = (Button)findViewById(R.id.button_send_test);
+        Button enviar = (Button) findViewById(R.id.button_send_test);
         Button ayuda = (Button) findViewById(R.id.button_advice);
-        RadioGroup group = (RadioGroup)findViewById(R.id.test_choices);
+        RadioGroup group = (RadioGroup) findViewById(R.id.test_choices);
 
         final int correct = 2;
 
@@ -82,7 +85,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public void ayuda(View view){
+    public void ayuda(View view) {
         TextView texto_ayuda = (TextView) findViewById(R.id.texto_ayuda);
         texto_ayuda.setText(R.string.texto_ayuda);
     }
