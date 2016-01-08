@@ -2,16 +2,21 @@ package es.tta.ejemplo31;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -22,10 +27,9 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        //Intent intent = getIntent();
+        Intent intent = getIntent();
 
         final Button enviar = (Button) findViewById(R.id.button_send_test);
-
 
         TextView pregunta = (TextView) findViewById(R.id.pregunta);
         pregunta.setText(R.string.preguntaTest);
@@ -88,6 +92,37 @@ public class TestActivity extends AppCompatActivity {
     public void ayuda(View view) {
         TextView texto_ayuda = (TextView) findViewById(R.id.texto_ayuda);
         texto_ayuda.setText(R.string.texto_ayuda);
+    }
+
+    private void showVideo(String advise) {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout_test);
+        VideoView video = new VideoView(this);
+        video.setVideoURI(Uri.parse(advise));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        video.setLayoutParams(params);
+
+        MediaController controller = new MediaController(this) {
+            @Override
+            public void hide() {
+            }
+
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent event) {
+
+                if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
+                    try {
+                        finalize();
+                    } catch (Throwable throwable) {
+                        //throwable.printStackTrace();
+                    }
+                return super.dispatchKeyEvent(event);
+            }
+        };
+        controller.setAnchorView(video);
+        video.setMediaController(controller);
+        layout.addView(video);
+        video.start();
+
     }
 
 

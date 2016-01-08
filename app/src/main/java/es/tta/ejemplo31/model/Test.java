@@ -2,18 +2,25 @@ package es.tta.ejemplo31.model;
 
 public class Test {
 
-    public static final String ADVICE_MIME_HTML="text/html";
-    public static final String ADVICE_MIME_AUDIO="video/mp4";
-    public static final String ADVICE_MIME_VIDEO="audio/mpeg";
+    private String wording;
+    private Choice [] choices;
 
-    private String w;
-
-    public Test(String wording, int [] choicesId, String [] choicesAdvise, String [] choicesAnswer,
+    public Test(String frase, int [] choicesId, String [] choicesAdvise, String [] choicesAnswer,
                 boolean [] choicesCorrect, String [] choicesResourceType){
 
-        w=wording;
+        wording=frase;
+        //Bucle for para cada choice dentro del test
 
+    }
 
+    public String getWording(){
+        return wording;
+    }
+
+    public Choice[] getChoices(){ return choices; }
+
+    public Choice getChoice(int i){
+        return choices[i];
     }
 
 }

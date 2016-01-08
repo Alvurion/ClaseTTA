@@ -11,18 +11,16 @@
     tools:context="es.tta.ejemplo31.MenuActivity">
 
     <TextView
-        android:id="@+id/menu_login"
+        android:id="@+id/menu_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bienvenido"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/menu_passwd"
+        android:id="@+id/menu_lesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leccion 0"
         android:textSize="15dp"
         android:layout_gravity="center_horizontal" />
 

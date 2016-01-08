@@ -22,7 +22,7 @@ public class Data {
 
     String pathTest = "getTest?id=%d";
     String pathExercise = "getExercise?id=%d";
-    String pathStatus = "getStatus?dni=%s";
+    //String pathStatus = "getStatus?dni=%s";
 
     public Data(String user, String passwd) {
         restClient = new RestClient(server);
@@ -34,7 +34,7 @@ public class Data {
     //Metodos GET
 
     public Status getStatus (String dni, String password) throws IOException, JSONException{
-        JSONObject jo = restClient.getJson(String.format(pathStatus,dni));
+        JSONObject jo = restClient.getJson(String.format("getStatus?dni=%s",dni));
         int id = jo.getInt("id");
         String user = jo.getString("user");
         int lessonNumber = jo.getInt("lessonNumber");
@@ -74,7 +74,8 @@ public class Data {
             choicesAnswer[i] = jsonChoice.getString("answer");
             choicesCorrect[i] = jsonChoice.getBoolean("correct");
 
-            //ResourceType puede devolver "null" o información (3 campos) en un JSONObject
+            //CORRECTO: ResourceType puede devolver "null" en caso de ser correcto.
+            //FALSO:    Información (3 campos) en un JSONObject en caso de ser falso.
             if(jsonChoice.isNull("resourceType")){
                 choicesResourceType[i] = null;
             }else{

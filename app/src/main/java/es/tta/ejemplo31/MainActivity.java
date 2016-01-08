@@ -6,17 +6,31 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 import es.tta.ejemplo31.comunicaciones.NetworkReceiver;
+import es.tta.ejemplo31.model.Status;
+import es.tta.ejemplo31.presentation.Data;
 
 public class MainActivity extends AppCompatActivity {
 
     //Actividad del login
     public final static String EXTRA_LOGIN = "es.tta.ejemplo31.login";
     public final static String EXTRA_PASSWD = "es.tta.ejemplo31.passwd";
+    public final static String EXTRA_USER = "es.tta.ejemplo31.user";
+    public final static String EXTRA_LESSON_NUMBER = "es.tta.ejemplo31.lessonnumber";
+    public final static String EXTRA_LESSON_TITLE = "es.tta.ejemplo31.lessontitle";
+    public final static String EXTRA_NEXT_TEST = "es.tta.ejemplo31.nexttest";
+    public final static String EXTRA_NEXT_EXERCISE = "es.tta.ejemplo31.nextexercise";
+
+    //public final static String EXTRA_USERSTATUS = "es.tta.ejemplo31.userStatus";
 
     private NetworkReceiver receiver;
 
@@ -29,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         //Register BroadcastReceiver to track network connection changes
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         receiver = new NetworkReceiver();
-        this.registerReceiver(receiver,filter);
+        this.registerReceiver(receiver, filter);
 
-        //Cargamos los datos del login (dni)
+        //Cargamos los datos del login (dni) si existe
         EditText editLogin = (EditText) findViewById(R.id.login);
         String log = getLogin();
         if (log != null) {
@@ -40,30 +54,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         //unregisters BroadcastReceiver when app is destroyed
-        if(receiver != null){
+        if (receiver != null) {
             this.unregisterReceiver(receiver);
         }
     }
 
-    public void login(View view) {
+    public void login(final View view){
 
-        EditText passwd = (EditText) findViewById(R.id.passwd);
-        String pwd = passwd.getText().toString();
+        EditText editLogin = (EditText) findViewById(R.id.login);
+        EditText editPasswd = (EditText) findViewById(R.id.passwd);
+        final String dni = editLogin.getText().toString();
+        final String pwd = editPasswd.getText().toString();
 
-        //Comprobamos que el password es el correcto
-        if (!pwd.equals("tta")) {
-            Toast.makeText(this, R.string.badPassword, Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(this, MenuActivity.class);
-            EditText editLogin = (EditText) findViewById(R.id.login);
-            putLogin(editLogin.getText().toString());
-            intent.putExtra(EXTRA_LOGIN, editLogin.getText().toString());
-            intent.putExtra(EXTRA_PASSWD, pwd);
-            startActivity(intent);
-        }
+        final Intent intent = new Intent(this, MenuActivity.class);
+        putLogin(dni);
+        final Data data = new Data(dni, pwd);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Status userStatus = null;
+                try {
+                    userStatus = data.getStatus(dni, pwd);
+                } catch (Exception e) {
+                    Log.e("ALERTA",e.getMessage(), e);
+                } finally {
+                    intent.putExtra(EXTRA_USER, userStatus.getUser());
+                    intent.putExtra(EXTRA_LESSON_NUMBER, userStatus.getLesson());
+                    intent.putExtra(EXTRA_LESSON_TITLE, userStatus.getLessonTitle());
+                    intent.putExtra(EXTRA_NEXT_TEST, userStatus.getNextTest());
+                    intent.putExtra(EXTRA_NEXT_EXERCISE, userStatus.getNextExercise());
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 
     private String getLogin() {

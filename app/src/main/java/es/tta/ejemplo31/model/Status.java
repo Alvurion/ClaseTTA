@@ -2,7 +2,9 @@ package es.tta.ejemplo31.model;
 
 //Status del usuario
 
-public class Status {
+import java.io.Serializable;
+
+public class Status implements Serializable {
     private int id;
     private String user;
     private int lesson;
